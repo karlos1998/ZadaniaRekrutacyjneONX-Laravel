@@ -24,6 +24,8 @@ class DatabaseSeeder extends Seeder
             ClientSeeder::class,
             //ItemSeeder::class,
             OrderSeeder::class,
+            CarSeeder::class,
+            CarUserSeeder::class,
         ]);
     }
 }

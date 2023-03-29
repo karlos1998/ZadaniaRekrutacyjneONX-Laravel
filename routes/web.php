@@ -46,3 +46,29 @@ Route::get('/zadanie1', function () {
     }
     dd($orders);
 });
+
+use App\Models\User;
+Route::get('/zadanie2', function () {
+    
+    $users = User::all();
+
+    foreach($users as $user)
+    {
+        echo "User {$user->id} -> {$user->email}<br>";
+
+        echo "Cars:<br>";
+        foreach($user->cars as $car)
+        {
+            echo "- {$car->id} -> ({$car->plate}) {$car->brand}";
+            echo "<br>";
+        }
+        $current_car = $user->cars()->wherePivot('is_current', true)->first();
+        if($current_car)
+        {
+            echo "Current Car:  " . $current_car->plate;
+        }
+
+        echo "<hr>";
+    }
+});
+
