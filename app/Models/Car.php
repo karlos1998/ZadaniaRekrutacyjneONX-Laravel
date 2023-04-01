@@ -9,6 +9,11 @@ class Car extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'brand',
+        'plate',
+    ];
+
     public function users()
     {
         return $this->belongsToMany(User::class, 'car_users');
