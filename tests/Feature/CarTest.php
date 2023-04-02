@@ -112,4 +112,26 @@ class CarTest extends TestCase
         $response->assertStatus(204);
     }
 
+
+    public function test_get_car(): void
+    {
+        $car = Car::factory()->create();
+
+        $response = $this->getJson("/api/cars/{$car->id}");
+        $response
+        ->assertStatus(200)
+        ->assertJson(fn (AssertableJson $json) =>
+            $json
+            ->whereType('data', 'array')
+            ->has('data', fn (AssertableJson $json) => 
+                $json
+                ->where('id', $car->id)
+                ->where('plate', $car->plate)
+                ->where('brand', $car->brand )
+                ->etc()
+            )
+            ->missing('message')
+        );
+    }
+
 }

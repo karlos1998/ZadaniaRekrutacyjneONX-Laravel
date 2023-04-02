@@ -39,7 +39,7 @@ class CarController extends Controller
      */
     public function show(Car $car)
     {
-        //
+        return new CarResource($car);
     }
 
     /**
